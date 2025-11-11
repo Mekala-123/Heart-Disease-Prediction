@@ -1,0 +1,100 @@
+# FastAPI Fundamentals – Week 2
+
+### 📚 Overview
+This project covers **FastAPI basics**:
+- Routers and modular structure  
+- Dependency Injection  
+- Request/Response models with Pydantic  
+- Schema validation and error handling  
+
+---
+
+### 🏗 Project Structure
+fastapi-bootstrap/
+├─ app/
+│ ├─ main.py
+│ ├─ deps.py
+│ ├─ errors.py
+│ ├─ routers/sample.py
+│ └─ schemas/sample.py
+├─ tests/test_sample.py
+├─ requirements.txt
+├─ README.md
+
+yaml
+Copy code
+
+---
+
+### ⚙️ Setup
+
+```bash
+# 1. Create virtual environment
+python -m venv venv
+.\venv\Scripts\activate       # Windows
+# source venv/bin/activate    # macOS/Linux
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Run the app
+uvicorn app.main:app --reload
+Open in browser → http://127.0.0.1:8000/docs
+
+🧩 API Endpoints
+POST /sample/
+
+json
+Copy code
+Request:
+{
+  "name": "Alice",
+  "quantity": 3,
+  "notes": "optional notes"
+}
+Response (201):
+{
+  "id": 1,
+  "name": "Alice",
+  "quantity": 3,
+  "notes": "optional notes"
+}
+GET /sample/{id}
+
+json
+Copy code
+Response (200):
+{
+  "id": 1,
+  "name": "Alice",
+  "quantity": 3,
+  "notes": "optional notes"
+}
+Error (404):
+
+json
+Copy code
+{
+  "error": {
+    "code": "HTTP_404",
+    "message": "Sample not found"
+  }
+}
+🧪 Run Tests
+bash
+Copy code
+pytest tests/
+coverage run -m pytest
+coverage report --fail-under=15
+✅ Ensure coverage ≥ 15%
+
+🧠 Summary
+Implemented GET /sample/{id} and POST /sample
+
+Added validation and dependencies
+
+Standardized error model
+
+Added tests for endpoints and validation
+
+Done ✅ — Swagger shows both endpoints and models, tests passing, coverage ≥ 15%.
